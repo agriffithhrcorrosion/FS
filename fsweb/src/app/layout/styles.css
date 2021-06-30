@@ -1,0 +1,27 @@
+.ui.inverted.top.fixed.menu{
+  background-color: rgb(255,255,255,0) !important;
+}
+
+.ui.inverted.segment{
+  background-color: rgb(33,40,67,1) !important;
+}
+
+body {
+  background-color: rgb(44,52,88,1) !important;
+}
+
+.ui.inverted.menu .item {
+  color: rgb(255,255,255,1) !important;
+}
+
+.ui.button {
+  background-color: rgb(44, 52, 88, 1);
+}
+
+.ui.menu .item:before{
+  color: rgb(255,255,255);
+  background-color: rgb(255, 255, 255,0);
+  width: 1px;
+  height: 10%;
+  margin-top: 35px;
+}
