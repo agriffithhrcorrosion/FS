@@ -17,6 +17,9 @@ body {
 .ui.button {
   background-color: rgb(44, 52, 88, 1);
 }
+.ui.form {
+  color: rgb(44,52,88,1) !important;
+}
 
 .ui.menu .item:before{
   color: rgb(255,255,255);
