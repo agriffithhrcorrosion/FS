@@ -35,7 +35,7 @@ export default observer(function LoginPage() {
                                     <Form.Input focus marginTop='2em' icon='user' iconPosition='left' placeholder='Create a username' />
                                     <Form.Input focus marginTop='2em' icon='key' iconPosition='left' placeholder='Create a password' type='password' />
                                     <Form.Input focus marginTop='2em' icon='key' iconPosition='left' placeholder='Confirm password' type='password'/>
-                                    <Form.Button fluid content='Create account' style={{ color: 'white' }} onClick={() => { setHomePage(!homePage); setLoginPage(!loginPage) }}/>
+                                    <Form.Button fluid content='Create account' style={{ color: 'white' }} onClick={() => { setHomePage(!homePage); setSignUpPage(!signUpPage) }}/>
                                 </Segment>
                             </Form>
                         </GridRow>
