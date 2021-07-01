@@ -1,27 +1,27 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
-import { Button, Container,Menu, Segment } from 'semantic-ui-react';
+import { Button, Container, Menu, Segment } from 'semantic-ui-react';
 import HomePageHeader from '../../features/fitstack/home/HomePageHeader';
 import { useStore } from '../stores/store';
 
 
 export default observer(function NavBar() {
 
-    const {fitStackStore} = useStore();
-    const {homePage} = fitStackStore;
+    const { fitStackStore } = useStore();
+    const { homePage } = fitStackStore;
 
     return (
         <Segment inverted style={{ minHeight: '650px' }} >
-            <Menu size="massive" inverted pointing fixed='top' style={{ marginTop: '15px', minHeight: '60px' }} >
+            <Menu activeIndex='2' size="massive" inverted pointing fixed='top' style={{ marginTop: '15px', minHeight: '60px' }} >
                 <Container fluid>
                     <Menu.Item
-                        style={{ 
-                            fontWeight: 'bold' ,
+                        style={{
+                            fontWeight: 'bold',
                             fontSize: 25
                         }}
                     >FitStack
                     </Menu.Item>
-                    <Menu.Item as='a' style={{ fontWeight: 'normal' }}>About</Menu.Item>
+                    <Menu.Item style={{ fontWeight: 'normal' }}>About</Menu.Item>
                     <Menu.Item style={{ fontWeight: 'normal' }}>Test</Menu.Item>
                     <Menu.Item style={{ fontWeight: 'normal' }}>Test</Menu.Item>
                     <Menu.Item position='right'>
@@ -46,8 +46,8 @@ export default observer(function NavBar() {
                     </Menu.Item>
                 </Container>
             </Menu>
-            { homePage &&
-            <HomePageHeader />}
+            {homePage &&
+                <HomePageHeader />}
         </Segment>
 
 
