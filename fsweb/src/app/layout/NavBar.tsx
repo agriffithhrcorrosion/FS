@@ -16,6 +16,7 @@ export default observer(function NavBar() {
             <Menu activeIndex='2' size="massive" inverted pointing fixed='top' style={{ marginTop: '15px', minHeight: '60px' }} >
                 <Container fluid>
                     <Menu.Item
+                        as={Link} to='/'
                         style={{
                             fontWeight: 'bold',
                             fontSize: 25
