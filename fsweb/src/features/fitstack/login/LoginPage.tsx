@@ -30,8 +30,7 @@ export default observer(function LoginPage() {
                                 <Segment stacked>
                                     <Form.Input focus marginTop='2em' icon='user' iconPosition='left' placeholder='Username' />
                                     <Form.Input  focus marginTop='2em' icon='key' iconPosition='left' placeholder='Password' type='password' />
-                                    <Form.Button fluid content='Sign in' style={{ color: 'white' }} onClick={() => { setHomePage(!homePage); setLoginPage(!loginPage) }}
-                                    />
+                                    <Form.Button fluid content='Sign in' style={{ color: 'white' }} />
                                 </Segment>
                             </Form>
                         </GridRow>
@@ -50,7 +49,7 @@ export default observer(function LoginPage() {
                         </GridRow>
                         <br />
                         <GridRow>
-                            <Button fluid basic animated onClick={() => { setLoginPage(!loginPage); setSignUpPage(!signUpPage)}}>
+                            <Button fluid basic animated >
                                 <Button.Content visible style={{ color: 'white' }}>Don't have an account?</Button.Content>
                                 <Button.Content hidden style={{ backgroundcolor: 'rgb(44, 52, 88, 1)' }}>
                                     <div>

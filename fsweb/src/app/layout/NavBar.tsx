@@ -11,11 +11,7 @@ import { useStore } from '../stores/store';
 export default observer(function NavBar() {
 
     const { fitStackStore } = useStore();
-<<<<<<< HEAD
-    const { setHomePage, homePage, setLoginPage, loginPage, setSignUpPage, signUpPage } = fitStackStore;
-=======
     const { homePage } = fitStackStore;
->>>>>>> b36ea86d37195b40ce7667c6fcf54d2f0c4d5ef1
 
     return (
         
@@ -33,11 +29,7 @@ export default observer(function NavBar() {
                     <Menu.Item style={{ fontWeight: 'normal' }}>Test</Menu.Item>
                     <Menu.Item position='right'>
                         <Button
-<<<<<<< HEAD
-                            onClick={() => { setHomePage(!homePage); setLoginPage(!loginPage) }}
-=======
                             as={Link} to='/login'
->>>>>>> b36ea86d37195b40ce7667c6fcf54d2f0c4d5ef1
                             style={{
                                 marginRight: '10px',
                                 fontSize: '5',
@@ -48,11 +40,7 @@ export default observer(function NavBar() {
                             Log In
                         </Button>
                         <Button
-<<<<<<< HEAD
-                            onClick={() => { setHomePage(!homePage); setSignUpPage(!signUpPage) }}
-=======
                             as={Link} to='/signup'
->>>>>>> b36ea86d37195b40ce7667c6fcf54d2f0c4d5ef1
                             style={{
                                 backgroundColor: '#2C3458',
                                 color: '#ffffff'
@@ -63,13 +51,6 @@ export default observer(function NavBar() {
                     </Menu.Item>
                 </Container>
             </Menu>
-<<<<<<< HEAD
-            {homePage && <HomePageHeader />}
-            {loginPage && <LoginPage />}
-            {signUpPage && <SignUpPage />}
-        </Segment>
-=======
->>>>>>> b36ea86d37195b40ce7667c6fcf54d2f0c4d5ef1
 
 
     )
