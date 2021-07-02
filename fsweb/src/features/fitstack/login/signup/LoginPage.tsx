@@ -18,7 +18,7 @@ export default observer(function LoginPage() {
                                 marginTop: '3em',
                                 marginBottom: '25px',
                                 color: '#ffffff'
-                            }}>Sign in to fitstack</Header>
+                            }}>Sign in to FitStack</Header>
                         </Container>
 
                         <GridRow verticalAlign='middle' >
@@ -27,7 +27,7 @@ export default observer(function LoginPage() {
                                 <Segment stacked>
                                     <Form.Input focus marginTop='2em' icon='user' iconPosition='left' placeholder='Username' />
                                     <Form.Input  focus marginTop='2em' icon='key' iconPosition='left' placeholder='Password' type='password' />
-                                    <Form.Button fluid content='Sign in' style={{ color: 'white' }} 
+                                    <Form.Button fluid content='Sign in' style={{ color: 'white' }}
                                     />
                                 </Segment>
                             </Form>
@@ -47,11 +47,11 @@ export default observer(function LoginPage() {
                         </GridRow>
                         <br />
                         <GridRow>
-                            <Button fluid basic animated >
-                                <Button.Content visible style={{ color: 'white' }}>Don't have an account?</Button.Content>
+                            <Button as={Link} to='/signup'  fluid basic animated >
+                                <Button.Content visible style={{ color: 'white' }}>Don't have an account? </Button.Content>
                                 <Button.Content hidden style={{ backgroundcolor: 'rgb(44, 52, 88, 1)' }}>
                                     <div>
-                                        <Header style={{ color: 'black', fontSize: 14, fontWeight: 'bold' }} content='click here to create one' />
+                                        <Header style={{ color: 'black', fontSize: 14, fontWeight: 'bold' }} content='Click Here To Create One' />
 
                                     </div>
                                 </Button.Content>

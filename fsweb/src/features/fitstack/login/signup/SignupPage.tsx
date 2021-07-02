@@ -17,7 +17,7 @@ export default observer(function LoginPage() {
                                 marginTop: '3em',
                                 marginBottom: '25px',
                                 color: '#ffffff'
-                            }}>Create a fitstack account</Header>
+                            }}>Create a FitStack account</Header>
                         </Container>
 
                         <GridRow verticalAlign='middle' >
@@ -37,11 +37,11 @@ export default observer(function LoginPage() {
                         </GridRow>
                         <br />
                         <GridRow>
-                            <Button fluid basic animated  >
-                                <Button.Content visible style={{ color: 'white' }}>Aready have an account?</Button.Content>
+                            <Button as={Link} to='/login' fluid basic animated  >
+                                <Button.Content  visible style={{ color: 'white' }}>Aready have an account?</Button.Content>
                                 <Button.Content hidden style={{ backgroundcolor: 'rgb(44, 52, 88, 1)' }}>
                                     <div>
-                                        <Header style={{ color: 'black', fontSize: 14, fontWeight: 'bold' }} content='Sign in instead' />
+                                        <Header style={{ color: 'black', fontSize: 14, fontWeight: 'bold' }} content='Sign In Instead' />
 
                                     </div>
                                 </Button.Content>
