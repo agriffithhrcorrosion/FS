@@ -26,7 +26,7 @@ export default observer(function LoginPage() {
 
                         <GridRow verticalAlign='middle' >
 
-                            <Form size='large' style={{ color: 'rgb(0,0,0,0)', }} >
+                            <Form size='large' >
                                 <Segment stacked>
                                     <Form.Input focus marginTop='2em' placeholder='First name' />
                                     <Form.Input focus marginTop='2em' placeholder='Last name' />
