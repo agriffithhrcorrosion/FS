@@ -11,7 +11,7 @@ export default observer(function NavBar() {
     const { homePage } = fitStackStore;
 
     return (
-        <Segment inverted style={{ minHeight: '650px' }} >
+        
             <Menu activeIndex='2' size="massive" inverted pointing fixed='top' style={{ marginTop: '15px', minHeight: '60px' }} >
                 <Container fluid>
                     <Menu.Item
@@ -46,9 +46,6 @@ export default observer(function NavBar() {
                     </Menu.Item>
                 </Container>
             </Menu>
-            {homePage &&
-                <HomePageHeader />}
-        </Segment>
 
 
     )

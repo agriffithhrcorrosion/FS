@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Menu, Statistic } from 'semantic-ui-react';
+import HomePageHeader from './HomePageHeader';
 
 export default function HomePage() {
 
@@ -15,6 +16,7 @@ export default function HomePage() {
 
     return (
         <>
+            <HomePageHeader/>
            <Container fluid>
            <Menu  borderless widths='4' style={{marginBottom: '7em', backgroundColor: 'rgb(0,0,0,0)', color: 'rgb(0,0,0,0)'}} fixed='bottom'>
                <Menu.Item>
