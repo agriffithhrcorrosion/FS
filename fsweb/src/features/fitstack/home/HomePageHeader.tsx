@@ -1,5 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Container, Header, Icon } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
 
@@ -23,6 +24,7 @@ export default observer(function HomePageHeader() {
 
             />
             <Button
+                as={Link} to='/signup'
                 size="massive"
                 style={{
                     marginTop: '20px',
