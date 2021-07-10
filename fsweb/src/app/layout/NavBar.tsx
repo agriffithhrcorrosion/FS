@@ -2,15 +2,10 @@ import { observer } from 'mobx-react-lite';
 import React from 'react';
 import logo from './logo.svg'
 import { Link } from 'react-router-dom';
-import { Button, Container, Icon, Menu, Segment } from 'semantic-ui-react';
-import HomePageHeader from '../../features/fitstack/home/HomePageHeader';
-import { useStore } from '../stores/store';
+import { Button, Container,  Menu} from 'semantic-ui-react';
 
 
 export default observer(function NavBar() {
-
-    const { fitStackStore } = useStore();
-    const { homePage } = fitStackStore;
 
     return (
         

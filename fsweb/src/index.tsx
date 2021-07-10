@@ -6,7 +6,8 @@ import App from './app/layout/App';
 import reportWebVitals from './reportWebVitals';
 import { store, StoreContext } from './app/stores/store';
 import { BrowserRouter } from 'react-router-dom';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
 
  var firebaseConfig = {
   apiKey: "AIzaSyAHFPwUloEUJUwCZy2WqotE7Dr9itPbyoI",

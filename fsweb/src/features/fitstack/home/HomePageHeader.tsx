@@ -2,13 +2,9 @@ import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Container, Header, Icon } from 'semantic-ui-react';
-import { useStore } from '../../../app/stores/store';
 
 
 export default observer(function HomePageHeader() {
-
-    const {fitStackStore} = useStore();
-    const {homePage, setHomePage} = fitStackStore;
 
     return (
         <Container fluid textAlign='center' text>
@@ -24,7 +20,7 @@ export default observer(function HomePageHeader() {
 
             />
             <Button
-                rounded
+                rounded='true'
                 as={Link} to='/signup'
                 size="massive"
                 style={{
@@ -32,7 +28,6 @@ export default observer(function HomePageHeader() {
                     backgroundColor: '#FE6347',
                     color: '#ffffff'
                 }}
-                onClick={() => setHomePage(!homePage)}
             >
                 Start Your Fitness Journey
                 <Icon name='arrow right' style={{color: '#ffffff', brightness:'100%', backgroundcolor: ''}}></Icon>
