@@ -14,9 +14,14 @@ export default observer(function LoginPage() {
         confirmPassword: ''
     })
 
-    function handleTestSignup() {
-        if (userSignup.password === userSignup.confirmPassword) {
-            firebase.auth().createUserWithEmailAndPassword(userSignup.email, userSignup.password);
+    async function  handleTestSignup(): Promise<string> {
+        try {
+            if (userSignup.password === userSignup.confirmPassword) {
+                await firebase.auth().createUserWithEmailAndPassword(userSignup.email, userSignup.password);
+            }
+            return 'true';
+        } catch (e) {
+            return e;
         }
     }
 
@@ -26,7 +31,7 @@ export default observer(function LoginPage() {
     }
 
     return (
-        <Grid verticalAlign='middle' textAlign='center' style={{marginTop: '8em' , height: '10vh' }} >
+        <Grid verticalAlign='middle' textAlign='center' style={{ marginTop: '8em', height: '10vh' }} >
             <GridColumn style={{ maxWidth: 550 }}>
                 <Container fluid textAlign='center' >
                     <Header as='h1' style={{
