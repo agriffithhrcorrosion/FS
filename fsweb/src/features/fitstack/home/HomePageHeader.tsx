@@ -24,17 +24,18 @@ export default observer(function HomePageHeader() {
 
             />
             <Button
+                rounded
                 as={Link} to='/signup'
                 size="massive"
                 style={{
                     marginTop: '20px',
-                    backgroundColor: '#2C3458',
+                    backgroundColor: '#FE6347',
                     color: '#ffffff'
                 }}
                 onClick={() => setHomePage(!homePage)}
             >
                 Start Your Fitness Journey
-                <Icon name='arrow right' style={{color: '#ffffff', brightness:'100%'}}></Icon>
+                <Icon name='arrow right' style={{color: '#ffffff', brightness:'100%', backgroundcolor: ''}}></Icon>
             </Button>
         </Container>
     )

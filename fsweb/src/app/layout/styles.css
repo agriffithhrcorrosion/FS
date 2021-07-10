@@ -1,17 +1,17 @@
 .ui.inverted.top.fixed.menu{
-  background-color: rgb(255,255,255,0) !important;
+  background-color: #272C33 !important;
 }
 
 .ui.inverted.segment{
-  background-color: rgb(33,40,67,1) !important;
+  background-image: url("C:\Development\FS\fsweb\src\assets\BG.png");
 }
 
 body {
-  background-color: rgb(44,52,88,1) !important;
+  background-color: #272C33 !important;
 }
 
 .ui.inverted.menu .item {
-  color: rgb(255,255,255,1) !important;
+  color: #ffffff !important;
 }
 
 .ui.button {
@@ -23,5 +23,5 @@ body {
   background-color: rgb(255, 255, 255,0);
   width: 1px;
   height: 10%;
-  margin-top: 35px;
+  margin-top: 29px;
 }

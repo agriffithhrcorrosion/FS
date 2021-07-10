@@ -1,7 +1,8 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
+import logo from './logo.svg'
 import { Link } from 'react-router-dom';
-import { Button, Container, Menu, Segment } from 'semantic-ui-react';
+import { Button, Container, Icon, Menu, Segment } from 'semantic-ui-react';
 import HomePageHeader from '../../features/fitstack/home/HomePageHeader';
 import { useStore } from '../stores/store';
 
@@ -13,15 +14,17 @@ export default observer(function NavBar() {
 
     return (
         
-            <Menu activeIndex='2' size="massive" inverted pointing fixed='top' style={{ marginTop: '15px', minHeight: '60px' }} >
+            <Menu activeIndex='2' size="massive" inverted pointing fixed='top' style={{ minHeight: '60px' }} >
                 <Container fluid>
                     <Menu.Item
                         as={Link} to='/'
                         style={{
                             fontWeight: 'bold',
-                            fontSize: 25
+                            fontSize: 18,
+                            marginLeft: '5px'
                         }}
-                    >FitStack
+                    >
+                       <img src={logo} className="App-logo" alt="logo"/>  
                     </Menu.Item>
                     <Menu.Item style={{ fontWeight: 'normal' }}>About</Menu.Item>
                     <Menu.Item style={{ fontWeight: 'normal' }}>Test</Menu.Item>
@@ -32,7 +35,7 @@ export default observer(function NavBar() {
                             style={{
                                 marginRight: '10px',
                                 fontSize: '5',
-                                backgroundColor: '#2C3458',
+                                backgroundColor: '#FE6347',
                                 color: '#ffffff'
                             }}
                         >
@@ -41,7 +44,7 @@ export default observer(function NavBar() {
                         <Button
                             as={Link} to='/signup'
                             style={{
-                                backgroundColor: '#2C3458',
+                                backgroundColor: '#FE6347',
                                 color: '#ffffff'
                             }}
                         >
