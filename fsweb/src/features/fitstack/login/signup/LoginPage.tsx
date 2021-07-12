@@ -1,10 +1,31 @@
+import firebase from 'firebase';
 import { observer } from 'mobx-react-lite';
-import React from 'react';
+import React, { ChangeEvent, useState } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Container, Form, Grid, GridColumn, GridRow, Header, Segment } from 'semantic-ui-react';
+import { Button, Container, Form, Grid, GridColumn, GridRow, Header, Label, Segment } from 'semantic-ui-react';
+import { useStore } from '../../../../app/stores/store';
 
 export default observer(function LoginPage() {
 
+    const [signInInfo, setSignInInfo] = useState({
+        email: '',
+        password: '',
+    })
+
+    async function handleLogIn(): Promise<string> {
+        try{
+            firebase.auth().signInWithEmailAndPassword(signInInfo.email, signInInfo.password);
+            return 'true';
+        }catch(e){
+            return e;
+        }
+    }
+
+    function handleChange(event: ChangeEvent<HTMLInputElement>) {
+        const { name, value } = event.target;
+        setSignInInfo({ ...signInInfo, [name]: value })
+    }
 
     return (
                 <Grid verticalAlign='middle' textAlign='center' style={{marginTop: '20px', height: '10vh' }} >
@@ -20,12 +41,12 @@ export default observer(function LoginPage() {
                         </Container>
 
                         <GridRow verticalAlign='middle' >
-                            <Form size='large' style={{backgroundColor: '#2C3458'}} >
+                            <Form onSubmit={handleLogIn} size='large' style={{backgroundColor: '#2C3458'}} >
                                 <Segment stacked>
-                                    <Form.Input focus marginTop='2em' icon='user' iconPosition='left' placeholder='Username' />
-                                    <Form.Input  focus marginTop='2em' icon='key' iconPosition='left' placeholder='Password' type='password' />
-                                    <Form.Button fluid content='Sign in' style={{ color: 'white', backgroundColor: '#FE6347' }}
-                                    />
+                                    <Form.Input onChange={handleChange} name='email' focus marginTop='2em' icon='user' iconPosition='left' placeholder='Email' />
+                                    <Form.Input onChange={handleChange} name='password' focus marginTop='2em' icon='key' iconPosition='left' placeholder='Password' type='password' />
+                                    <Form.Button type='submit' fluid content='Sign in' style={{ color: 'white', backgroundColor: '#FE6347' }}/>
+                                    
                                 </Segment>
                             </Form>
                         </GridRow>
@@ -45,10 +66,10 @@ export default observer(function LoginPage() {
                                 </Button.Content>
                             </Button>
                         </GridRow>
+                        
+                        
+                        <Label>{firebase.auth().currentUser?.email}</Label>
                     </GridColumn>
                 </Grid>
-
     )
-
-
 })
