@@ -58,11 +58,7 @@ export default observer(function LoginPage() {
                                     Passwords must match!
                                 </Message>
                             ) : (null)}
-
-                            {userSignup.password !== userSignup.confirmPassword ? (
-                                <Button disabled fluid content='Create account' style={{ color: 'white', backgroundColor: '#FE6347' }} />
-                            ) : (
-                                <Button type='submit' fluid content='Create account' style={{ color: 'white', backgroundColor: '#FE6347' }} />)}
+                                <Button type='submit' disabled={userSignup.password !== userSignup.confirmPassword} fluid content='Create account' style={{ color: 'white', backgroundColor: '#FE6347' }} />
 
 
 
