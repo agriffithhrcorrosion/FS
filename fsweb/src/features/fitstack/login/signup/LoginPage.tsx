@@ -43,7 +43,7 @@ export default observer(function LoginPage() {
                         <GridRow verticalAlign='middle' >
                             <Form onSubmit={handleLogIn} size='large' style={{backgroundColor: '#2C3458'}} >
                                 <Segment stacked>
-                                    <Form.Input onChange={handleChange} name='email' focus marginTop='2em' icon='user' iconPosition='left' placeholder='Email' />
+                                    <Form.Input onChange={handleChange} name='email' focus marginTop='2em' icon='mail' iconPosition='left' placeholder='Email' />
                                     <Form.Input onChange={handleChange} name='password' focus marginTop='2em' icon='key' iconPosition='left' placeholder='Password' type='password' />
                                     <Form.Button type='submit' fluid content='Sign in' style={{ color: 'white', backgroundColor: '#FE6347' }}/>
                                     
@@ -54,7 +54,7 @@ export default observer(function LoginPage() {
                             <Button style={{marginTop: '10px'}} fluid basic animated >
                                 <Button.Content visible style={{ color: 'white' }}>Forgot your username or password?</Button.Content>
                                 <Button.Content hidden style={{ backgroundcolor: 'rgb(44, 52, 88, 0)' }}>
-                                        <Header style={{ color: 'black', fontSize: 14, fontWeight: 'bold' }} content='click here for account help' />
+                                        <Header style={{ color: 'black', fontSize: 14, fontWeight: 'bold' }} content='Click here for account help' />
                                 </Button.Content>
                             </Button>
                         </GridRow>
@@ -62,7 +62,7 @@ export default observer(function LoginPage() {
                             <Button style={{marginTop: '10px'}} as={Link} to='/signup'  fluid basic animated >
                                 <Button.Content visible style={{ color: 'white' }}>Don't have an account? </Button.Content>
                                 <Button.Content hidden style={{ backgroundcolor: 'rgb(44, 52, 88, 0)' }}>
-                                        <Header style={{ color: 'black', fontSize: 14, fontWeight: 'bold' }} content='Click Here To Create One' />
+                                        <Header style={{ color: 'black', fontSize: 14, fontWeight: 'bold' }} content='Click here to create one' />
                                 </Button.Content>
                             </Button>
                         </GridRow>

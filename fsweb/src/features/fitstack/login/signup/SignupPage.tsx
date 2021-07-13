@@ -68,7 +68,7 @@ export default observer(function LoginPage() {
                     <Button style={{ marginTop: '10px' }} as={Link} to='/login' fluid basic animated  >
                         <Button.Content visible style={{ color: 'white' }}>Aready have an account?</Button.Content>
                         <Button.Content hidden style={{ backgroundcolor: 'rgb(44, 52, 88, 0)' }}>
-                            <Header style={{ color: 'black', fontSize: 14, fontWeight: 'bold' }} content='Sign In Instead' />
+                            <Header style={{ color: 'black', fontSize: 14, fontWeight: 'bold' }} content='Sign In instead' />
                         </Button.Content>
                     </Button>
                 </GridRow>
