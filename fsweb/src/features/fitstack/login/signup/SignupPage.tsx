@@ -2,7 +2,7 @@ import firebase from 'firebase';
 import { observer } from 'mobx-react-lite';
 import { ChangeEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Container, Form, Grid, GridColumn, GridRow, Header, Segment } from 'semantic-ui-react';
+import { Button, Container, Form, Grid, GridColumn, GridRow, Header, Message, Segment } from 'semantic-ui-react';
 
 
 
@@ -14,13 +14,15 @@ export default observer(function LoginPage() {
         confirmPassword: ''
     })
 
-    async function  handleTestSignup(): Promise<string> {
+    async function handleTestSignup(): Promise<string> {
         try {
             if (userSignup.password === userSignup.confirmPassword) {
+
                 await firebase.auth().createUserWithEmailAndPassword(userSignup.email, userSignup.password);
             }
             return 'true';
         } catch (e) {
+
             return e;
         }
     }
@@ -48,12 +50,25 @@ export default observer(function LoginPage() {
                             {/* <Form.Input focus marginTop='2em' icon='user' iconPosition='left' placeholder='Create a username' /> */}
                             <Form.Input onChange={handleChange} name='password' focus marginTop='2em' icon='key' iconPosition='left' placeholder='Create a password' type='password' />
                             <Form.Input onChange={handleChange} name='confirmPassword' focus marginTop='2em' icon='key' iconPosition='left' placeholder='Confirm password' type='password' />
-                            <Button type='submit' fluid content='Create account' style={{ color: 'white', backgroundColor: '#FE6347' }} />
+
+                            {userSignup.password !== userSignup.confirmPassword ? (
+                                <Message color='red'>
+                                    Passwords must match!
+                                </Message>
+                            ) : (null)}
+
+                            {userSignup.password !== userSignup.confirmPassword ? (
+                                <Button disabled fluid content='Create account' style={{ color: 'white', backgroundColor: '#FE6347' }} />
+                            ) : (
+                                <Button type='submit' fluid content='Create account' style={{ color: 'white', backgroundColor: '#FE6347' }} />)}
+
+
+
                         </Segment>
                     </Form>
                 </GridRow>
                 <GridRow>
-                    <Button as={Link} to='/login' fluid basic animated  >
+                    <Button style={{ marginTop: '10px' }} as={Link} to='/login' fluid basic animated  >
                         <Button.Content visible style={{ color: 'white' }}>Aready have an account?</Button.Content>
                         <Button.Content hidden style={{ backgroundcolor: 'rgb(44, 52, 88, 0)' }}>
                             <Header style={{ color: 'black', fontSize: 14, fontWeight: 'bold' }} content='Sign In Instead' />
