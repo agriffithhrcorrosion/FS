@@ -22,7 +22,7 @@ export default observer(function LoginPage() {
             }
             return 'true';
         } catch (e) {
-
+            console.log(e);
             return e;
         }
     }
@@ -46,7 +46,9 @@ export default observer(function LoginPage() {
                 <GridRow verticalAlign='middle' >
                     <Form onSubmit={handleTestSignup} size='large' >
                         <Segment stacked>
-                            <Form.Input onChange={handleChange} name='email' icon='mail' iconPosition='left' focus marginTop='2em' placeholder='Email' />
+                            {userSignup.email.includes('@') }
+
+                            <Form.Input onChange={handleChange} name='email' icon='mail' iconPosition='left' focus marginTop='2em' placeholder='Email' type='email' />
                             {/* <Form.Input focus marginTop='2em' icon='user' iconPosition='left' placeholder='Create a username' /> */}
                             <Form.Input onChange={handleChange} name='password' focus marginTop='2em' icon='key' iconPosition='left' placeholder='Create a password' type='password' />
                             <Form.Input onChange={handleChange} name='confirmPassword' focus marginTop='2em' icon='key' iconPosition='left' placeholder='Confirm password' type='password' />
