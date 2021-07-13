@@ -3,7 +3,7 @@
 }
 
 .ui.inverted.segment{
-  background-image: url("../../assets/BG.png");
+  background-image: url("../../assets/HeaderBackground.png");
 }
 
 body {
@@ -24,4 +24,8 @@ body {
   width: 1px;
   height: 10%;
   margin-top: 29px;
+}
+
+.ui.mini.image {
+  width: 45px
 }

@@ -1,24 +1,25 @@
 import firebase from 'firebase';
 import { observer } from 'mobx-react-lite';
-import { ChangeEvent, useState } from 'react';
+import { stringifyKey } from 'mobx/dist/internal';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Container, Form, Grid, GridColumn, GridRow, Header, Message, Segment } from 'semantic-ui-react';
+import { Button, Container, Form, Grid, GridColumn, GridRow, Header, Label, Message, Segment } from 'semantic-ui-react';
 
 
 
 export default observer(function LoginPage() {
 
-    const [userSignup, setUserSignup] = useState({
+    const [signUpInfo, setSignUpInfo] = useState({
         email: '',
         password: '',
-        confirmPassword: ''
-    })
+        confirmPassword: '',
+    });
 
-    async function handleTestSignup(): Promise<string> {
+    
+    async function  handleSignUp(): Promise<string> {
         try {
-            if (userSignup.password === userSignup.confirmPassword) {
-
-                await firebase.auth().createUserWithEmailAndPassword(userSignup.email, userSignup.password);
+            if (signUpInfo.password === signUpInfo.confirmPassword) {
+                await firebase.auth().createUserWithEmailAndPassword(signUpInfo.email, signUpInfo.password);
             }
             return 'true';
         } catch (e) {
@@ -29,8 +30,9 @@ export default observer(function LoginPage() {
 
     function handleChange(event: ChangeEvent<HTMLInputElement>) {
         const { name, value } = event.target;
-        setUserSignup({ ...userSignup, [name]: value })
+        setSignUpInfo({ ...signUpInfo, [name]: value })
     }
+
 
     return (
         <Grid verticalAlign='middle' textAlign='center' style={{ marginTop: '8em', height: '10vh' }} >
@@ -44,21 +46,18 @@ export default observer(function LoginPage() {
                     }}>Create a FitStack account</Header>
                 </Container>
                 <GridRow verticalAlign='middle' >
-                    <Form onSubmit={handleTestSignup} size='large' >
+                    <Form onSubmit={handleSignUp} size='large' >
                         <Segment stacked>
-                            {userSignup.email.includes('@') }
-
-                            <Form.Input onChange={handleChange} name='email' icon='mail' iconPosition='left' focus marginTop='2em' placeholder='Email' type='email' />
-                            {/* <Form.Input focus marginTop='2em' icon='user' iconPosition='left' placeholder='Create a username' /> */}
+                            <Form.Input onChange={handleChange} name='email' icon='mail' iconPosition='left' focus marginTop='2em' placeholder='Email' />
                             <Form.Input onChange={handleChange} name='password' focus marginTop='2em' icon='key' iconPosition='left' placeholder='Create a password' type='password' />
                             <Form.Input onChange={handleChange} name='confirmPassword' focus marginTop='2em' icon='key' iconPosition='left' placeholder='Confirm password' type='password' />
 
-                            {userSignup.password !== userSignup.confirmPassword ? (
+                            {signUpInfo.password !== signUpInfo.confirmPassword ? (
                                 <Message color='red'>
                                     Passwords must match!
                                 </Message>
                             ) : (null)}
-                                <Button type='submit' disabled={userSignup.password !== userSignup.confirmPassword} fluid content='Create account' style={{ color: 'white', backgroundColor: '#FE6347' }} />
+                                <Button type='submit' disabled={signUpInfo.password !== signUpInfo.confirmPassword} fluid content='Create account' style={{ color: 'white', backgroundColor: '#FE6347' }} />
 
 
 
@@ -73,6 +72,7 @@ export default observer(function LoginPage() {
                         </Button.Content>
                     </Button>
                 </GridRow>
+                <Label content={[firebase.auth().currentUser?.email]} />
             </GridColumn>
         </Grid>
     )
