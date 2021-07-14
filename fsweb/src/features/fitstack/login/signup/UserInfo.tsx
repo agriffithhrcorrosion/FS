@@ -3,21 +3,20 @@ import { observer } from 'mobx-react-lite';
 import { stringifyKey } from 'mobx/dist/internal';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Container, Form, Grid, GridColumn, GridRow, Header, Label, Segment } from 'semantic-ui-react';
+import { Button, Container, Form, Grid, GridColumn, GridRow, Header, Label, ListProps, Segment } from 'semantic-ui-react';
+import { StringLiteral } from 'typescript';
+import fitStackStore from '../../../../app/stores/fitStackStore';
 import { useStore } from '../../../../app/stores/store';
 
 
 
 export default observer(function LoginPage() {
 
-    const [signUpInfo, setSignUpInfo] = useState({
-        email: '',
-        password: '',
-        confirmPassword: '',
-    });
+    const {fitStackStore} = useStore();
+    const {setValues, userDetails, userDetailKeys} = fitStackStore;
 
     
-    async function  handleSignUp(): Promise<string> {
+    /* async function  handleSignUp(): Promise<string> {
         try {
             if (signUpInfo.password === signUpInfo.confirmPassword) {
                 await firebase.auth().createUserWithEmailAndPassword(signUpInfo.email, signUpInfo.password);
@@ -26,12 +25,12 @@ export default observer(function LoginPage() {
         } catch (e) {
             return e;
         }
-    }
+    } */
 
-    function handleChange(event: ChangeEvent<HTMLInputElement>) {
+     function handleChange(event: ChangeEvent<HTMLInputElement>) {
         const { name, value } = event.target;
-        setSignUpInfo({ ...signUpInfo, [name]: value })
-    }
+        setValues(userDetails, name as typeof userDetailKeys , value)
+    } 
 
 
     return (
@@ -43,17 +42,14 @@ export default observer(function LoginPage() {
                         fontWeight: 'bold',
                         marginBottom: '25px',
                         color: '#ffffff'
-                    }}>Create a FitStack account</Header>
+                    }}>Let's Gather Some Additional Info</Header>
                 </Container>
                 <GridRow verticalAlign='middle' >
-                    <Form onSubmit={handleSignUp} size='large' >
+                    <Form  size='large' >
                         <Segment stacked>
-                        <Form.Input onChange={handleChange} name='firstName' icon='mail' iconPosition='left' focus marginTop='2em' placeholder='Email' />
-                        <Form.Input onChange={handleChange} name='lastName' icon='mail' iconPosition='left' focus marginTop='2em' placeholder='Email' />
-                            <Form.Input onChange={handleChange} name='email' icon='mail' iconPosition='left' focus marginTop='2em' placeholder='Email' />
-                            <Form.Input onChange={handleChange} name='password' focus marginTop='2em' icon='key' iconPosition='left' placeholder='Create a password' type='password' />
-                            <Form.Input onChange={handleChange} name='confirmPassword' focus marginTop='2em' icon='key' iconPosition='left' placeholder='Confirm password' type='password' />
-                            <Button as={Link} to='/userinfo' type='submit' fluid content='Create account' style={{ color: 'white', backgroundColor: '#FE6347' }} />
+                            <Form.Input onChange={handleChange}  name='firstName' icon='mail' iconPosition='left' focus marginTop='2em' placeholder='Age' />
+                            <Form.Input onChange={handleChange}   name='lastName' icon='arrows alternate vertical' iconPosition='left' focus marginTop='2em' placeholder='Age' />
+                            <Button as={Link} to='/setupinfo' type='submit' fluid content='Create account' style={{ color: 'white', backgroundColor: '#FE6347' }} />
                         </Segment>
                     </Form>
                 </GridRow>
@@ -65,7 +61,8 @@ export default observer(function LoginPage() {
                         </Button.Content>
                     </Button>
                 </GridRow>
-                <Label content={[firebase.auth().currentUser?.email]} />
+                <Label content={userDetails.firstName} />
+                <Label content={userDetails.lastName} />
             </GridColumn>
         </Grid>
     )
