@@ -9,6 +9,7 @@ import { auth } from '../../firebase/firebase';
 import { useStore } from '../stores/store';
 import { observer } from 'mobx-react-lite';
 import firebase from 'firebase';
+import HomePageHeader from '../../features/fitstack/home/HomePageHeader';
 import UserInfo from '../../features/fitstack/login/signup/UserInfo';
 
 function App() {
@@ -30,7 +31,9 @@ function App() {
       <Segment inverted style={{ minHeight: '650px' }} >
         <NavBar />
         <Container>
-          <Route  exact path='/' component={HomePage}/>
+          <Route path='/' component={HomePage} />
+          <Route exact path='/' component={HomePageHeader} />
+          {/* <Route  exact path='/' component={HomePage}/> */}
           <Route path='/login' component={LoginPage}/>
           <Route path='/signup' component={SignupPage}/>
           <Route path='/userinfo' component={UserInfo}/>

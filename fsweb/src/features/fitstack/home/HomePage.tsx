@@ -16,7 +16,7 @@ export default function HomePage() {
 
     return (
         <>
-            <HomePageHeader />
+       {/* <HomePageHeader /> */}
             <Container fluid >
                 <Menu fluid widths='4' style={{ marginBottom: '5em', backgroundColor: '#272C33', color: '#CECECE' }} fixed='bottom'>
                     <Menu.Item>
