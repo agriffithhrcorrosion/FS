@@ -1,16 +1,35 @@
 import firebase from "firebase";
-import { makeAutoObservable, runInAction } from "mobx";
-import { ChangeEvent, useState } from "react";
-import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
+import { keys, makeAutoObservable, runInAction } from "mobx";
+import { ChangeEvent, Key, useState } from "react";
+import { collapseTextChangeRangesAcrossMultipleVersions, IndexedAccessType, PropertyName } from "typescript";
+import { user } from "../models/user";
+
+
 
 export default class fitStackStore {
-    currentUser = {} || null; 
+    currentUser = {} || null;
     testBool = true;
+    userDetailKeys!: 'firstName' | 'lastName' | 'dailyCalories' | 'workoutFrequency' | 'workoutGoal' | 'howExperienced' | 'height' | 'weight' | 'age' | 'nationality' | 'dailyCalories' 
 
-    userSignUp = {
-        email: '',
-        password: '',
-        confirmPassword: '',
+
+
+
+    userDetails = {
+        firstName: '',
+        lastName: '',
+        dailyCalories: 0,
+        workoutFrequency: '',
+        workoutGoal: '',
+        howExperienced: '',
+        height: 0,
+        weight: 0,
+        age: 0,
+        nationality: '',
+    }
+
+
+    setValues<T, K extends keyof T>(obj: T, propName: K, value: any) {
+        obj[propName] = value;
     }
 
     userSignIn = {
@@ -27,28 +46,28 @@ export default class fitStackStore {
         this.currentUser = user
     }
 
-    setUserSignUp(event: ChangeEvent<HTMLInputElement>) {
-        const { name, value } = event.target;
-        this.userSignUp = ({ ...this.userSignUp, [name]: value })
-    }
+    /*     setUserSignUp(event: ChangeEvent<HTMLInputElement>) {
+            const { name, value } = event.target;
+            this.userSignUp = ({ ...this.userSignUp, [name]: value })
+        } */
 
     setUserSignIn(event: ChangeEvent<HTMLInputElement>) {
         const { name, value } = event.target;
         this.userSignIn = ({ ...this.userSignIn, [name]: value })
     }
 
-    signUp = async () => {
-        try {
-            if (this.userSignUp.password === this.userSignUp.confirmPassword) {
-                await firebase.auth().createUserWithEmailAndPassword(this.userSignUp.email, this.userSignUp.password);
+    /*     signUp = async () => {
+            try {
+                if (this.userSignUp.password === this.userSignUp.confirmPassword) {
+                    await firebase.auth().createUserWithEmailAndPassword(this.userSignUp.email, this.userSignUp.password);
+                }
+                return 'true';
+            } catch (e) {
+                return e;
             }
-            return 'true';
-        } catch (e) {
-            return e;
+    
         }
-
-    }
-
+     */
     signIn = async () => {
         try {
 

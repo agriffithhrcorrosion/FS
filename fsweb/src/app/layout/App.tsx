@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavBar from './NavBar';
 import { Container, Segment } from 'semantic-ui-react';
 import HomePage from '../../features/fitstack/home/HomePage';
@@ -10,8 +10,10 @@ import { useStore } from '../stores/store';
 import { observer } from 'mobx-react-lite';
 import firebase from 'firebase';
 import HomePageHeader from '../../features/fitstack/home/HomePageHeader';
+import UserInfo from '../../features/fitstack/login/signup/UserInfo';
 
 function App() {
+  const [loading, setLoading] = useState();
 
   const {fitStackStore} = useStore();
   const {currentUser, setCurrentUser} = fitStackStore;
@@ -19,7 +21,7 @@ function App() {
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged(user => {
         setCurrentUser(user);
-        
+
     })
     return unsubscribe
 }, [])
@@ -34,6 +36,7 @@ function App() {
           {/* <Route  exact path='/' component={HomePage}/> */}
           <Route path='/login' component={LoginPage}/>
           <Route path='/signup' component={SignupPage}/>
+          <Route path='/userinfo' component={UserInfo}/>
         </Container>
 
 
