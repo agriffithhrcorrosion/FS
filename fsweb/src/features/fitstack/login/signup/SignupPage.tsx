@@ -65,7 +65,7 @@ export default observer(function LoginPage() {
                     </Form>
                 </GridRow>
                 <GridRow>
-                    <Button as={Link} to='/login' fluid basic animated  >
+                    <Button as={Link} to='/login' fluid basic animated style={{marginTop: '10px'}} >
                         <Button.Content visible style={{ color: 'white' }}>Aready have an account?</Button.Content>
                         <Button.Content hidden style={{ backgroundcolor: 'rgb(44, 52, 88, 0)' }}>
                             <Header style={{ color: 'black', fontSize: 14, fontWeight: 'bold' }} content='Sign In Instead' />
