@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { stringifyKey } from 'mobx/dist/internal';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Container, Form, Grid, GridColumn, GridRow, Header, Label, ListProps, Segment } from 'semantic-ui-react';
+import { Button, Container, Form, Grid, GridColumn, GridRow, Header, Icon, Label, List, ListProps, Rail, Segment } from 'semantic-ui-react';
 import { StringLiteral } from 'typescript';
 import fitStackStore from '../../../../app/stores/fitStackStore';
 import { useStore } from '../../../../app/stores/store';
@@ -12,10 +12,16 @@ import { useStore } from '../../../../app/stores/store';
 
 export default observer(function LoginPage() {
 
-    const {fitStackStore} = useStore();
-    const {setValues, userDetails, userDetailKeys} = fitStackStore;
+    const { fitStackStore } = useStore();
+    const { setValues, userDetails, userDetailKeys, signUpInfoState, setSignUpState } = fitStackStore;
 
-    
+    const buttonStyle = {
+        color: 'white',
+        backgroundColor: '#FE6347',
+        minWidth: '20em'
+    }
+
+
     /* async function  handleSignUp(): Promise<string> {
         try {
             if (signUpInfo.password === signUpInfo.confirmPassword) {
@@ -27,10 +33,31 @@ export default observer(function LoginPage() {
         }
     } */
 
-     function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    function handleChange(event: ChangeEvent<HTMLInputElement>) {
         const { name, value } = event.target;
-        setValues(userDetails, name as typeof userDetailKeys , value)
-    } 
+        setValues(userDetails, name as typeof userDetailKeys, value)
+    }
+
+    function handleButtonPress(event: React.MouseEvent<HTMLButtonElement>) {
+        const { id, value } = event.currentTarget;
+        setValues(userDetails, id as typeof userDetailKeys, value)
+    }
+
+    function submitUserInfo() {
+        firebase.firestore().collection('UserInfo').add({
+            admin: false,
+            age: userDetails.age,
+            email: userDetails.email,
+            firstName: userDetails.firstName,
+            height: userDetails.height,
+            lastName: userDetails.lastName,
+            mainWorkoutGoal: userDetails.workoutGoal,
+            nationality: userDetails.nationality,
+            weight: userDetails.weight,
+            workoutExperienceLevel: userDetails.howExperienced,
+            workoutFrequency: userDetails.workoutFrequency
+        })
+    }
 
 
     return (
@@ -42,14 +69,75 @@ export default observer(function LoginPage() {
                         fontWeight: 'bold',
                         marginBottom: '25px',
                         color: '#ffffff'
-                    }}>Let's Gather Some Additional Info</Header>
+                    }}>Create a FitStack account</Header>
                 </Container>
                 <GridRow verticalAlign='middle' >
-                    <Form  size='large' >
+                    <Form size='large' >
                         <Segment stacked>
-                            <Form.Input onChange={handleChange}  name='firstName' icon='mail' iconPosition='left' focus marginTop='2em' placeholder='Age' />
-                            <Form.Input onChange={handleChange}   name='lastName' icon='arrows alternate vertical' iconPosition='left' focus marginTop='2em' placeholder='Age' />
-                            <Button as={Link} to='/setupinfo' type='submit' fluid content='Create account' style={{ color: 'white', backgroundColor: '#FE6347' }} />
+                            {signUpInfoState === 0 &&
+                                <Container>
+                                    <Header content='Daily Caloric Intake' style={{ color: '#272C33' }} />
+                                    <Form.Input onChange={handleChange} name='dailyCalories' icon='fire' iconPosition='left' focus marginTop='2em' placeholder='Daily Calories' />
+                                    <Container style={{ minHeight: '1em' }} />
+                                </Container>
+                            }
+                            {signUpInfoState === 1 &&
+                                <Container>
+                                    <Header content='Workout Frequency' style={{ color: '#000000' }} />
+                                    <Form.Button onClick={handleButtonPress} value='Daily' id='workoutFrequency' content='Daily' style={buttonStyle} />
+                                    <Form.Button onClick={handleButtonPress} value='1-2 days a week' id='workoutFrequency' content='1-2 days a week' style={buttonStyle} />
+                                    <Form.Button onClick={handleButtonPress} value='3-4 days a week' id='workoutFrequency' content='3-4 days a week' style={buttonStyle} />
+                                    <Form.Button onClick={handleButtonPress} value='5-6 days a week' id='workoutFrequency' content='5-6 days a week' style={buttonStyle} />
+                                    <Container style={{ minHeight: '1em' }} />
+                                </Container>
+                            }
+                            {signUpInfoState === 2 &&
+                                <Container>
+                                    <Header content='Workout Goal' style={{ color: '#000000' }} />
+                                    <Form.Button onClick={handleButtonPress} value='I want to get stronger' id='workoutGoal' content='I want to get stronger' style={buttonStyle} />
+                                    <Form.Button onClick={handleButtonPress} value='I want to lose weight' id='workoutGoal' content='I want to lose weight' style={buttonStyle} />
+                                    <Form.Button onClick={handleButtonPress} value='I want to gain more muscle' id='workoutGoal' content='I want to gain more muscle' style={buttonStyle} />
+                                    <Form.Button onClick={handleButtonPress} value='Just to improve my health' id='workoutGoal' content='Just to improve my health' style={buttonStyle} />
+                                    <Container style={{ minHeight: '1em' }} />
+                                </Container>
+                            }
+                            {signUpInfoState === 3 &&
+                                <Container>
+                                    <Header content='Lifting Experience' style={{ color: '#000000' }} />
+                                    <Form.Button onClick={handleButtonPress} value='Beginner' id='howExperienced' content='Beginner' style={buttonStyle} />
+                                    <Form.Button onClick={handleButtonPress} value='Moderate' id='howExperienced' content='Moderate' style={buttonStyle} />
+                                    <Form.Button onClick={handleButtonPress} value='Experienced' id='howExperienced' content='Experienced' style={buttonStyle} />
+                                    <Form.Button onClick={handleButtonPress} value='Professional' id='howExperienced' content='Professional' style={buttonStyle} />
+                                    <Container style={{ minHeight: '1em' }} />
+                                </Container>
+                            }
+                            {signUpInfoState === 4 &&
+                                <Container>
+                                    <Header content='About You' style={{ color: '#272C33' }} />
+                                    <Form.Input onChange={handleChange} name='height' icon='arrows alternate vertical' iconPosition='left' focus marginTop='2em' placeholder='height' />
+                                    <Form.Input onChange={handleChange} name='weight' icon='weight' iconPosition='left' focus marginTop='2em' placeholder='weight' />
+                                    <Form.Input onChange={handleChange} name='age' icon='user' iconPosition='left' focus marginTop='2em' placeholder='age' />
+                                    <Form.Input onChange={handleChange} name='nationality' icon='flag' iconPosition='left' focus marginTop='2em' placeholder='nationality' />
+                                    <Container style={{ minHeight: '1em' }} />
+                                </Container>
+                            }
+                            {signUpInfoState !== 4 &&
+                                <Container>
+                                    <Button onClick={setSignUpState} fluid style={{ color: 'white', backgroundColor: '#FE6347' }} >
+                                        Continue
+                                        <Icon name='arrow right' />
+                                    </Button>
+                                </Container>
+                            }
+                            {signUpInfoState === 4 &&
+                                <Container>
+                                    <Button onClick={submitUserInfo} as={Link} to='/' fluid style={{ color: 'white', backgroundColor: '#FE6347' }} >
+                                        Continue
+                                        <Icon name='arrow right' />
+                                    </Button>
+                                </Container>
+                            }
+
                         </Segment>
                     </Form>
                 </GridRow>
@@ -61,9 +149,26 @@ export default observer(function LoginPage() {
                         </Button.Content>
                     </Button>
                 </GridRow>
-                <Label content={userDetails.firstName} />
-                <Label content={userDetails.lastName} />
+                <Rail position='right'>
+                    <List>
+                        <List.Item style={{ backgroundColor: '#FE6347' }} content={firebase.auth().currentUser?.email} />
+                        <List.Item style={{ backgroundColor: '#FE6347' }} content={userDetails.email} />
+                        <List.Item style={{ backgroundColor: '#FE6347' }} content={userDetails.firstName} />
+                        <List.Item style={{ backgroundColor: '#FE6347' }} content={userDetails.lastName} />
+                        <List.Item style={{ backgroundColor: '#FE6347' }} content={userDetails.dailyCalories} />
+                        <List.Item style={{ backgroundColor: '#FE6347' }} content={userDetails.workoutFrequency} />
+                        <List.Item style={{ backgroundColor: '#FE6347' }} content={userDetails.workoutGoal} />
+                        <List.Item style={{ backgroundColor: '#FE6347' }} content={userDetails.howExperienced} />
+                        <List.Item style={{ backgroundColor: '#FE6347' }} content={userDetails.height} />
+                        <List.Item style={{ backgroundColor: '#FE6347' }} content={userDetails.weight} />
+                        <List.Item style={{ backgroundColor: '#FE6347' }} content={userDetails.age} />
+                        <List.Item style={{ backgroundColor: '#FE6347' }} content={userDetails.nationality} />
+                    </List>
+                </Rail>
+
+
             </GridColumn>
         </Grid>
     )
-})
+}
+)

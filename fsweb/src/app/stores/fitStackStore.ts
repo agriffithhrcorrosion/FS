@@ -9,12 +9,13 @@ import { user } from "../models/user";
 export default class fitStackStore {
     currentUser = {} || null;
     testBool = true;
-    userDetailKeys!: 'firstName' | 'lastName' | 'dailyCalories' | 'workoutFrequency' | 'workoutGoal' | 'howExperienced' | 'height' | 'weight' | 'age' | 'nationality' | 'dailyCalories' 
-
+    userDetailKeys!: 'email' | 'firstName' | 'lastName' | 'dailyCalories' | 'workoutFrequency' | 'workoutGoal' | 'howExperienced' | 'height' | 'weight' | 'age' | 'nationality' | 'dailyCalories' 
+    signUpInfoState = 0;
 
 
 
     userDetails = {
+        email: '',
         firstName: '',
         lastName: '',
         dailyCalories: 0,
@@ -36,6 +37,10 @@ export default class fitStackStore {
         email: '',
         password: '',
     }
+
+    setSignUpState = () => {
+        this.signUpInfoState++
+    } 
 
 
     constructor() {

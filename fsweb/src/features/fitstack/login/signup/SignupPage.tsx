@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { stringifyKey } from 'mobx/dist/internal';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Container, Form, Grid, GridColumn, GridRow, Header, Label, Segment } from 'semantic-ui-react';
+import { Button, ButtonProps, Container, Form, Grid, GridColumn, GridRow, Header, Icon, Label, Segment } from 'semantic-ui-react';
 import { useStore } from '../../../../app/stores/store';
 
 
@@ -15,6 +15,9 @@ export default observer(function LoginPage() {
         password: '',
         confirmPassword: '',
     });
+
+    const {fitStackStore} = useStore();
+    const {setValues, userDetails, userDetailKeys} = fitStackStore;
 
     
     async function  handleSignUp(): Promise<string> {
@@ -28,9 +31,15 @@ export default observer(function LoginPage() {
         }
     }
 
-    function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    function handleChangeInput(event: ChangeEvent<HTMLInputElement>) {
         const { name, value } = event.target;
         setSignUpInfo({ ...signUpInfo, [name]: value })
+        setValues(userDetails, name as typeof userDetailKeys, value);
+    }
+
+    function handleButtonPress(event: React.MouseEvent<HTMLButtonElement> ){
+        const {id, value} = event.currentTarget;
+        setValues(userDetails, id as typeof userDetailKeys, value)
     }
 
 
@@ -46,12 +55,22 @@ export default observer(function LoginPage() {
                     }}>Create a FitStack account</Header>
                 </Container>
                 <GridRow verticalAlign='middle' >
-                    <Form onSubmit={handleSignUp} size='large' >
+                    <Form  size='large' >
                         <Segment stacked>
-                            <Form.Input onChange={handleChange} name='email' icon='mail' iconPosition='left' focus marginTop='2em' placeholder='Email' />
-                            <Form.Input onChange={handleChange} name='password' focus marginTop='2em' icon='key' iconPosition='left' placeholder='Create a password' type='password' />
-                            <Form.Input onChange={handleChange} name='confirmPassword' focus marginTop='2em' icon='key' iconPosition='left' placeholder='Confirm password' type='password' />
-                            <Button as={Link} to='/userinfo' type='submit' fluid content='Create account' style={{ color: 'white', backgroundColor: '#FE6347' }} />
+                            <Form.Input onChange={handleChangeInput} name='firstName' icon='user' iconPosition='left' focus marginTop='2em' placeholder='First Name' />
+                            <Form.Input onChange={handleChangeInput} name='lastName' icon='user' iconPosition='left' focus marginTop='2em' placeholder='Last Name' />
+                            <Form.Input onChange={handleChangeInput} name='email' icon='mail' iconPosition='left' focus marginTop='2em' placeholder='Email' />
+                            <Form.Input onChange={handleChangeInput} name='password' focus marginTop='2em' icon='key' iconPosition='left' placeholder='Password' type='password' />
+                            <Form.Input onChange={handleChangeInput} name='confirmPassword' focus marginTop='2em' icon='key' iconPosition='left' placeholder='Confirm Password' type='password' />
+                            <Button 
+                            onClick={handleSignUp} 
+                            as={Link} to='/userinfo' 
+                            fluid  
+                            style={{ color: 'white', 
+                            backgroundColor: '#FE6347' }} >
+                                Continue
+                                <Icon name='arrow right' />
+                            </Button>
                         </Segment>
                     </Form>
                 </GridRow>
@@ -64,6 +83,10 @@ export default observer(function LoginPage() {
                     </Button>
                 </GridRow>
                 <Label content={[firebase.auth().currentUser?.email]} />
+                <Label content={userDetails.email} />
+                <Label content={userDetails.firstName} />
+                <Label content={userDetails.lastName} />
+                <Label content={signUpInfo.email} />
             </GridColumn>
         </Grid>
     )
