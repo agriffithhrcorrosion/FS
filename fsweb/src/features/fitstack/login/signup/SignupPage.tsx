@@ -57,6 +57,8 @@ export default observer(function LoginPage() {
                 <GridRow verticalAlign='middle' >
                     <Form  size='large' >
                         <Segment stacked>
+                        <Form.Input onChange={handleChangeInput} name='firstName' icon='user' iconPosition='left' focus marginTop='2em' placeholder='First Name' />
+                        <Form.Input onChange={handleChangeInput} name='lastName' icon='user' iconPosition='left' focus marginTop='2em' placeholder='Last Name' />
                             <Form.Input onChange={handleChangeInput} name='email' icon='mail' iconPosition='left' focus marginTop='2em' placeholder='Email' />
                             <Form.Input onChange={handleChangeInput} name='password' focus marginTop='2em' icon='key' iconPosition='left' placeholder='Create a password' type='password' />
                             <Form.Input onChange={handleChangeInput} name='confirmPassword' focus marginTop='2em' icon='key' iconPosition='left' placeholder='Confirm password' type='password' />
