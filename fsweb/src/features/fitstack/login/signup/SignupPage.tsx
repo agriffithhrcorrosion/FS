@@ -64,12 +64,13 @@ export default observer(function LoginPage() {
                             <Form.Input onChange={handleChangeInput} name='confirmPassword' focus marginTop='2em' icon='key' iconPosition='left' placeholder='Confirm password' type='password' />
 
                             {signUpInfo.password !== signUpInfo.confirmPassword ? (
-                                <Message color='red'>
+                                <Message color='red' style={{backgroundColor: '#ffffff'}}>
                                     Passwords must match!
                                 </Message>
                             ) : (null)}
-                                <Button type='submit' 
-                                disabled={signUpInfo.password !== signUpInfo.confirmPassword} 
+                                <Button  
+                                disabled={signUpInfo.password !== signUpInfo.confirmPassword} onClick={handleSignUp}
+                                as={Link} to='/userinfo'
                                 fluid content='Create account' style={{ color: 'white', backgroundColor: '#FE6347' }} />
 
                         </Segment>
@@ -83,11 +84,6 @@ export default observer(function LoginPage() {
                         </Button.Content>
                     </Button>
                 </GridRow>
-                <Label content={[firebase.auth().currentUser?.email]} />
-                <Label content={userDetails.email} />
-                <Label content={userDetails.firstName} />
-                <Label content={userDetails.lastName} />
-                <Label content={signUpInfo.email} />
             </GridColumn>
         </Grid>
     )

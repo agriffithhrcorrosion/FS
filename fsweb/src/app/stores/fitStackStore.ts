@@ -7,10 +7,11 @@ import { user } from "../models/user";
 
 
 export default class fitStackStore {
-    currentUser = {} || null;
+    currentUser!: firebase.User | null;
     testBool = true;
     userDetailKeys!: 'email' | 'firstName' | 'lastName' | 'dailyCalories' | 'workoutFrequency' | 'workoutGoal' | 'howExperienced' | 'height' | 'weight' | 'age' | 'nationality' | 'dailyCalories' 
     signUpInfoState = 0;
+    signedInUserDetails!: firebase.firestore.DocumentData | null
 
 
 
@@ -27,6 +28,8 @@ export default class fitStackStore {
         age: 0,
         nationality: '',
     }
+
+
 
 
     setValues<T, K extends keyof T>(obj: T, propName: K, value: any) {
@@ -47,7 +50,11 @@ export default class fitStackStore {
         makeAutoObservable(this)
     }
 
-    setCurrentUser = (user: {} | null) => {
+    setSignedInUserDetails = (info: firebase.firestore.DocumentData | null) => {
+        this.signedInUserDetails = info;
+    }
+
+    setCurrentUser = (user: firebase.User | null) => {
         this.currentUser = user
     }
 

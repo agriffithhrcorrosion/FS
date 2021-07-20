@@ -29,3 +29,10 @@ body {
 .ui.mini.image {
   width: 45px
 }
+
+.ui.inverted.button{
+  color: #ffffff;
+  border-color: #272C33;
+  border: 2em;
+  background-color: #272C33;
+}

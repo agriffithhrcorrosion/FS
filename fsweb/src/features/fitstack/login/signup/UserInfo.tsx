@@ -16,9 +16,9 @@ export default observer(function LoginPage() {
     const { setValues, userDetails, userDetailKeys, signUpInfoState, setSignUpState } = fitStackStore;
 
     const buttonStyle = {
-        color: 'white',
-        backgroundColor: '#FE6347',
-        minWidth: '20em'
+        color: '#FE6347',
+        backgroundColor: '#ffffff',
+        minWidth: '20em',
     }
 
 
@@ -44,7 +44,8 @@ export default observer(function LoginPage() {
     }
 
     function submitUserInfo() {
-        firebase.firestore().collection('UserInfo').add({
+        var uid = firebase.auth().currentUser?.uid
+        firebase.firestore().collection('UserInfo').doc(uid).set({
             admin: false,
             age: userDetails.age,
             email: userDetails.email,
@@ -84,30 +85,30 @@ export default observer(function LoginPage() {
                             {signUpInfoState === 1 &&
                                 <Container>
                                     <Header content='Workout Frequency' style={{ color: '#000000' }} />
-                                    <Form.Button onClick={handleButtonPress} value='Daily' id='workoutFrequency' content='Daily' style={buttonStyle} />
-                                    <Form.Button onClick={handleButtonPress} value='1-2 days a week' id='workoutFrequency' content='1-2 days a week' style={buttonStyle} />
-                                    <Form.Button onClick={handleButtonPress} value='3-4 days a week' id='workoutFrequency' content='3-4 days a week' style={buttonStyle} />
-                                    <Form.Button onClick={handleButtonPress} value='5-6 days a week' id='workoutFrequency' content='5-6 days a week' style={buttonStyle} />
+                                    <Form.Button inverted onClick={handleButtonPress} value='Daily' id='workoutFrequency' content='Daily' style={buttonStyle} />
+                                    <Form.Button inverted onClick={handleButtonPress} value='1-2 days a week' id='workoutFrequency' content='1-2 days a week' style={buttonStyle} />
+                                    <Form.Button invertedonClick={handleButtonPress} value='3-4 days a week' id='workoutFrequency' content='3-4 days a week' style={buttonStyle} />
+                                    <Form.Button inverted onClick={handleButtonPress} value='5-6 days a week' id='workoutFrequency' content='5-6 days a week' style={buttonStyle} />
                                     <Container style={{ minHeight: '1em' }} />
                                 </Container>
                             }
                             {signUpInfoState === 2 &&
                                 <Container>
                                     <Header content='Workout Goal' style={{ color: '#000000' }} />
-                                    <Form.Button onClick={handleButtonPress} value='I want to get stronger' id='workoutGoal' content='I want to get stronger' style={buttonStyle} />
-                                    <Form.Button onClick={handleButtonPress} value='I want to lose weight' id='workoutGoal' content='I want to lose weight' style={buttonStyle} />
-                                    <Form.Button onClick={handleButtonPress} value='I want to gain more muscle' id='workoutGoal' content='I want to gain more muscle' style={buttonStyle} />
-                                    <Form.Button onClick={handleButtonPress} value='Just to improve my health' id='workoutGoal' content='Just to improve my health' style={buttonStyle} />
+                                    <Form.Button inverted onClick={handleButtonPress} value='I want to get stronger' id='workoutGoal' content='I want to get stronger' style={buttonStyle} />
+                                    <Form.Button inverted onClick={handleButtonPress} value='I want to lose weight' id='workoutGoal' content='I want to lose weight' style={buttonStyle} />
+                                    <Form.Button inverted onClick={handleButtonPress} value='I want to gain more muscle' id='workoutGoal' content='I want to gain more muscle' style={buttonStyle} />
+                                    <Form.Button inverted onClick={handleButtonPress} value='Just to improve my health' id='workoutGoal' content='Just to improve my health' style={buttonStyle} />
                                     <Container style={{ minHeight: '1em' }} />
                                 </Container>
                             }
                             {signUpInfoState === 3 &&
                                 <Container>
                                     <Header content='Lifting Experience' style={{ color: '#000000' }} />
-                                    <Form.Button onClick={handleButtonPress} value='Beginner' id='howExperienced' content='Beginner' style={buttonStyle} />
-                                    <Form.Button onClick={handleButtonPress} value='Moderate' id='howExperienced' content='Moderate' style={buttonStyle} />
-                                    <Form.Button onClick={handleButtonPress} value='Experienced' id='howExperienced' content='Experienced' style={buttonStyle} />
-                                    <Form.Button onClick={handleButtonPress} value='Professional' id='howExperienced' content='Professional' style={buttonStyle} />
+                                    <Form.Button inverted onClick={handleButtonPress} value='Beginner' id='howExperienced' content='Beginner' style={buttonStyle} />
+                                    <Form.Button inverted onClick={handleButtonPress} value='Moderate' id='howExperienced' content='Moderate' style={buttonStyle} />
+                                    <Form.Button inverted onClick={handleButtonPress} value='Experienced' id='howExperienced' content='Experienced' style={buttonStyle} />
+                                    <Form.Button inverted onClick={handleButtonPress} value='Professional' id='howExperienced' content='Professional' style={buttonStyle} />
                                     <Container style={{ minHeight: '1em' }} />
                                 </Container>
                             }
@@ -149,24 +150,6 @@ export default observer(function LoginPage() {
                         </Button.Content>
                     </Button>
                 </GridRow>
-                <Rail position='right'>
-                    <List>
-                        <List.Item style={{ backgroundColor: '#FE6347' }} content={firebase.auth().currentUser?.email} />
-                        <List.Item style={{ backgroundColor: '#FE6347' }} content={userDetails.email} />
-                        <List.Item style={{ backgroundColor: '#FE6347' }} content={userDetails.firstName} />
-                        <List.Item style={{ backgroundColor: '#FE6347' }} content={userDetails.lastName} />
-                        <List.Item style={{ backgroundColor: '#FE6347' }} content={userDetails.dailyCalories} />
-                        <List.Item style={{ backgroundColor: '#FE6347' }} content={userDetails.workoutFrequency} />
-                        <List.Item style={{ backgroundColor: '#FE6347' }} content={userDetails.workoutGoal} />
-                        <List.Item style={{ backgroundColor: '#FE6347' }} content={userDetails.howExperienced} />
-                        <List.Item style={{ backgroundColor: '#FE6347' }} content={userDetails.height} />
-                        <List.Item style={{ backgroundColor: '#FE6347' }} content={userDetails.weight} />
-                        <List.Item style={{ backgroundColor: '#FE6347' }} content={userDetails.age} />
-                        <List.Item style={{ backgroundColor: '#FE6347' }} content={userDetails.nationality} />
-                    </List>
-                </Rail>
-
-
             </GridColumn>
         </Grid>
     )
